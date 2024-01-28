@@ -2,14 +2,14 @@
   <form class="p-4">
     <div class="form-group col-md-3">
       <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" id="inputEmail4" placeholder="Email" #email>
+      <input type="email" class="form-control" id="inputEmail4" placeholder="Please enter your email" #email>
     </div>
     <div class="form-group col-md-3 mt-3">
       <label for="inputPassword4">Password</label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Password" #password>
+      <input type="password" class="form-control" id="inputPassword4" placeholder="Please enter your password" #password>
     </div>
     <button type="button" class="btn btn-success" (click)="onSignIn(email.value , password.value)">Sign in</button>
-    <button type="button" class="btn btn-success m-3 " (click)="onRegister()" >register</button>
+    <button type="button" class="btn btn-primary m-3" (click)="onRegister()" >Register</button>
   </form>
 </div>
 

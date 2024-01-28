@@ -12,8 +12,8 @@ export class UserService {
   url = "http://localhost:3000"
 
 
-  //CRUD          create        read      update        delete
-                  //post       //get    //post/put    //delete
+  //CRUD    create      read      update      delete
+  //        post        get       post/put    delete
 
 
 
@@ -23,7 +23,7 @@ export class UserService {
 
 
 
-  get() { 
+  get() {
    return this.http.get<IUser[]>(this.url + '/users')
   }
 

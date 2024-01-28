@@ -32,8 +32,7 @@ export class LoginService {
 
   login(email: string, password: string) {
     let users: IUser[] = [];
-    //CRUD    create      read      update      delete
-    //        post        get       post/put    delete
+
     this.userService.get().subscribe((res:IUser[]) => {
         users = res;
         let user:IUser|undefined = users.find(x => x.email === email && x.password === password);
