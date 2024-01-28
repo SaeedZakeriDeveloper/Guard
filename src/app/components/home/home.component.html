@@ -1,20 +1,20 @@
-<div *ngIf="!editMode">
-    <form class="p-4">
-        <div class="form-group col-md-3">
-            <label for="inputEmail4">Email</label>
-            <input type="email" class="form-control" id="inputEmail4" placeholder="Email" #email>
-        </div>
-        <div class="form-group col-md-3 mt-3">
-            <label for="inputPassword4">Password</label>
-            <input type="password" class="form-control" id="inputPassword4" placeholder="Password" #password>
-        </div>
-        <button type="button" class="btn btn-success" (click)="onSignIn(email.value , password.value)">Sign in</button>
-        <button type="button" class="btn btn-success m-3 " (click)="onRegister()" >register</button>
-    </form>
+<div *ngIf="!loggedIn">
+  <form class="p-4">
+    <div class="form-group col-md-3">
+      <label for="inputEmail4">Email</label>
+      <input type="email" class="form-control" id="inputEmail4" placeholder="Email" #email>
+    </div>
+    <div class="form-group col-md-3 mt-3">
+      <label for="inputPassword4">Password</label>
+      <input type="password" class="form-control" id="inputPassword4" placeholder="Password" #password>
+    </div>
+    <button type="button" class="btn btn-success" (click)="onSignIn(email.value , password.value)">Sign in</button>
+    <button type="button" class="btn btn-success m-3 " (click)="onRegister()" >register</button>
+  </form>
 </div>
 
 
-<div *ngIf="editMode">
-    <h1>Wellcome To Home component</h1>
+<div *ngIf="loggedIn">
+  <h5 class="text-success">{{(profile | async)?.name}} welcome to Home component</h5>
 </div>
 
