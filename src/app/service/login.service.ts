@@ -10,13 +10,13 @@ import {BehaviorSubject, Observable, Subject} from 'rxjs';
 })
 export class LoginService {
 
-  url:string = "http://localhost:3000";
+  url: string = "http://localhost:3000";
   // This subject is used to emit the event of a successful (true) or unsuccessful (false) login attempt.
   private _loginSuccess$: Subject<boolean> = new Subject<boolean>();
-// This BehaviourSubject is used to hold and emit the data of the logged in user, or undefined if the user is not logged in.
-  private _userProfile$:BehaviorSubject<IUser | undefined> = new BehaviorSubject<IUser | undefined>(undefined);
+  // This BehaviourSubject is used to hold and emit the data of the logged in user, or undefined if the user is not logged in.
+  private _userProfile$: BehaviorSubject<IUser | undefined> = new BehaviorSubject<IUser | undefined>(undefined);
 
-  constructor( private userService: UserService) {
+  constructor(private userService: UserService) {
   }
 
   public get loginSuccess(): Observable<boolean> {
@@ -27,15 +27,12 @@ export class LoginService {
     return this._userProfile$;
   }
 
-  // soal inke ma bayad koja az method find estefade konim ?
-  // javab inke agar bekhahim az natijeye sub estefade konim faghat va faghat vayad dakhele block subscribe az method find estefade kpnim
-
   login(email: string, password: string) {
     let users: IUser[] = [];
 
-    this.userService.get().subscribe((res:IUser[]) => {
+    this.userService.get().subscribe((res: IUser[]) => {
         users = res;
-        let user:IUser|undefined = users.find(x => x.email === email && x.password === password);
+        let user: IUser | undefined = users.find(x => x.email === email && x.password === password);
         if (user) {
           this._loginSuccess$.next(true);
           this._userProfile$.next(user);
@@ -45,6 +42,5 @@ export class LoginService {
       }
     );
   }
-
 
 }
