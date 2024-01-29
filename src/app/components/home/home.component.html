@@ -6,15 +6,14 @@
     </div>
     <div class="form-group col-md-3 mt-3">
       <label for="inputPassword4">Password</label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Please enter your password" #password>
+      <input type="password" class="form-control" id="inputPassword4" placeholder="Please enter your password"
+             #password>
     </div>
     <button type="button" class="btn btn-success" (click)="onSignIn(email.value , password.value)">Sign in</button>
-    <button type="button" class="btn btn-primary m-3" (click)="onRegister()" >Register</button>
+    <button type="button" class="btn btn-primary m-3" (click)="onRegister()">Register</button>
   </form>
 </div>
-
 
 <div *ngIf="loggedIn">
   <h5 class="text-success">{{(profile | async)?.name}} welcome to Home component</h5>
 </div>
-
