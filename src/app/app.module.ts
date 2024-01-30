@@ -6,7 +6,8 @@ import {HomeComponent} from './components/home/home.component';
 import {AboutComponent} from './components/about/about.component';
 import {AdminComponent} from './components/admin/admin.component';
 import {RegisterComponent} from './components/register/register.component';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
+import { NotAuthenticatedComponent } from './components/not-authenticated/not-authenticated.component'
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {HttpClientModule} from '@angular/common/http'
     HomeComponent,
     AboutComponent,
     AdminComponent,
-    RegisterComponent
+    RegisterComponent,
+    NotAuthenticatedComponent
   ],
   imports: [
     BrowserModule,

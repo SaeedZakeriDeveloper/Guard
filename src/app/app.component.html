@@ -5,7 +5,7 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto w-100">
       <li class="nav-item active">
         <a class="nav-link" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
       </li>
@@ -14,6 +14,9 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/admin']" routerLinkActive="active">admin</a>
+      </li>
+      <li class="nav-item" style="margin-left: auto; margin-right: 17px;">
+        <button class="btn btn-danger" (click)="onLogout()">Logout</button>
       </li>
     </ul>
   </div>
