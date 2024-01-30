@@ -1,18 +1,26 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {IUser} from 'src/app/interfaces/api-interface';
 import {UserService} from 'src/app/service/user.service';
 import {ActivatedRoute, Router} from "@angular/router";
+import {CanComponentDeactivate} from "../../guards/register.guard";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit, CanComponentDeactivate {
 
+  @ViewChild('name') name: ElementRef | undefined;
+  @ViewChild('email') email: ElementRef | undefined;
+  @ViewChild('password') password: ElementRef | undefined;
   user: IUser = {id: 0, name: '', email: '', password: ''};
 
   constructor(private userService: UserService, private router: Router, private routes: ActivatedRoute) {
+  }
+
+  ngOnInit(): void {
   }
 
   onAddUser(name: string, email: string, password: string) {
@@ -33,6 +41,17 @@ export class RegisterComponent {
         this.router.navigate([''], {relativeTo: this.routes});
       });
     });
+  }
+
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    let name = this.name?.nativeElement.value;
+    let email = this.email?.nativeElement.value;
+    let password = this.password?.nativeElement.value;
+    if (name || email || password) {
+      return confirm("Are you sure to exit?");
+    } else {
+      return true;
+    }
   }
 
 }
