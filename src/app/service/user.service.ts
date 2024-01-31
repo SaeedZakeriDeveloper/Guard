@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {IUser} from '../interfaces/api-interface';
+import {IUser} from '../interfaces/iUser';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
@@ -24,3 +24,6 @@ export class UserService {
   }
 
 }
+
+
+//enterface  class   service    IService

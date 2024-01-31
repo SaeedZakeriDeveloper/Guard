@@ -1,7 +1,7 @@
 // https://levioconsulting.com/insights/intro-to-rxjs-in-angular-observables-subjects-and-behaviorsubjects/#:~:text=Subjects%20are%20a%20type%20of,for%20changes%20(using%20subscribe()).
 
 import {Injectable} from '@angular/core';
-import {IUser} from '../interfaces/api-interface';
+import {IUser} from '../interfaces/iUser';
 import {UserService} from './user.service';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {ActivatedRoute, Router} from "@angular/router";
@@ -29,6 +29,7 @@ export class LoginService {
     return this._userProfile$;
   }
 
+  
   login(email: string, password: string) {
     let users: IUser[] = [];
 

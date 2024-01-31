@@ -1,9 +1,10 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {IUser} from 'src/app/interfaces/api-interface';
+import {IUser} from 'src/app/interfaces/iUser';
 import {UserService} from 'src/app/service/user.service';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CanComponentDeactivate} from "../../guards/register.guard";
 import {Observable} from "rxjs";
+import { User } from 'src/app/classes/user';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,9 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate {
   @ViewChild('name') name: ElementRef | undefined;
   @ViewChild('email') email: ElementRef | undefined;
   @ViewChild('password') password: ElementRef | undefined;
-  user: IUser = {id: 0, name: '', email: '', password: ''};
+  // user: IUser = {id: 0, name: '', email: '', password: ''};
+     user: User = {id: 0, name: '', email: '', password: ''};
+
 
   constructor(private userService: UserService, private router: Router, private routes: ActivatedRoute) {
   }
@@ -24,6 +27,11 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate {
   }
 
   onAddUser(name: string, email: string, password: string) {
+
+    this.user = new User(1 , undefined , '' ,'');
+
+
+
     this.userService.get().subscribe((users) => {
       if (users.length > 0) {
         let ids = users.map(u => u.id);

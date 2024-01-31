@@ -2,7 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoginService} from 'src/app/service/login.service';
 import {Observable, Subscription} from "rxjs";
-import {IUser} from "../../interfaces/api-interface";
+import {IUser} from "../../interfaces/iUser";
+import { Student, User } from 'src/app/classes/user';
 
 @Component({
   selector: 'app-home',
@@ -19,9 +20,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   profile: Observable<IUser | undefined> = this.loginService.userProfile;
 
   constructor(private router: Router, private routes: ActivatedRoute, private loginService: LoginService) {
+    let obj: Student=new Student();
   }
 
   ngOnInit(): void {
+    let  obj=new Student();
     // Add subscription to subscriptions array
     this.subscriptions.push(
       // listen for login success/error
