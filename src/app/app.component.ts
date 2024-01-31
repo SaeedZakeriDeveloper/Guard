@@ -7,13 +7,22 @@ import {LoginService} from "./service/login.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   title = 'guard';
+  isAuthenticated = this.loginService.isAuthenticated();
 
   constructor(private loginService: LoginService) {
   }
 
   onLogout() {
     this.loginService.logout();
+    this.loginService.loginSuccess.subscribe((res) => {
+      alert(res);
+    })
   }
+
+  // get isAuthenticated() {
+  //   return this.loginService.isAuthenticated();
+  // }
 
 }

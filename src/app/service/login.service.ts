@@ -12,7 +12,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class LoginService {
 
   url: string = "http://localhost:3000";
-  loggedIn: boolean = false;
+  authenticated: boolean = false;
   // This subject is used to emit the event of a successful (true) or unsuccessful (false) login attempt.
   private _loginSuccess$: Subject<boolean> = new Subject<boolean>();
   // This BehaviourSubject is used to hold and emit the data of the logged in user, or undefined if the user is not logged in.
@@ -21,7 +21,7 @@ export class LoginService {
   constructor(private userService: UserService, private router: Router, private routes: ActivatedRoute) {
   }
 
-  public get loginSuccess(): Observable<boolean> {
+  public get loginSuccess(): Observable<boolean> { // This is a property get
     return this._loginSuccess$;
   }
 
@@ -29,7 +29,6 @@ export class LoginService {
     return this._userProfile$;
   }
 
-  
   login(email: string, password: string) {
     let users: IUser[] = [];
 
@@ -37,7 +36,7 @@ export class LoginService {
         users = res;
         let user: IUser | undefined = users.find(x => x.email === email && x.password === password);
         if (user) {
-          this.loggedIn = true;
+          this.authenticated = true;
           this._loginSuccess$.next(true);
           this._userProfile$.next(user);
         } else {
@@ -48,12 +47,12 @@ export class LoginService {
   }
 
   logout() {
-    this.loggedIn = false;
+    this.authenticated = false;
     this.router.navigate([''], {relativeTo: this.routes});
   }
 
   isAuthenticated() {
-    return this.loggedIn;
+    return this.authenticated;
   }
 
 }

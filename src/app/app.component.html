@@ -15,7 +15,7 @@
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/admin']" routerLinkActive="active">admin</a>
       </li>
-      <li class="nav-item" style="margin-left: auto; margin-right: 17px;">
+      <li *ngIf="isAuthenticated" class="nav-item" style="margin-left: auto; margin-right: 17px;">
         <button class="btn btn-danger" (click)="onLogout()">Logout</button>
       </li>
     </ul>
