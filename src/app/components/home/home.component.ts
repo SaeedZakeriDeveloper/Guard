@@ -29,14 +29,13 @@ export class HomeComponent implements OnInit, OnDestroy {
       // listen for login success/error
       this.loginService.loginSuccess.subscribe((result: any) => {
         this.loggedIn = result.value;
-        if(result.event ==  'login') { 
-          let loginMessage = result ? 'Login was successful' : 'Error logging in';
+        if(result.event ==  'login') {    //nemidonestim next ke dare sub mishe az login hast ya logout
+          let loginMessage = result.value ? 'Login was successful' : 'Error logging in';
           alert(loginMessage);
         }
       })
     );
   }
-
 
 
   onRegister() {
@@ -45,20 +44,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onSignIn(email: string, password: string) {
     this.loginService.login(email, password);
-    // this.loginService.loginSuccess.subscribe(res=>{
-    //
-    // })
-
-
-
-
-
-    // this.loginService.loginSuccess.subscribe((success: boolean) => {
-    //   this.loggedIn = success;
-    //   let loginMessage = success ? 'Login was successful' : 'Error logging in';
-    //   alert(loginMessage);
-    // })
   }
+
+
 
   ngOnDestroy(): void {
     // When component is destroyed, it is important to clean up subscriptions.

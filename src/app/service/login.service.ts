@@ -51,11 +51,10 @@ export class LoginService {
       }
     );
   }
-
-
+  
   logout() {
     this._loginSuccess$.next({
-      value : false , 
+      value : false ,
       event : 'logout' 
     });
     this.authenticated = false;
