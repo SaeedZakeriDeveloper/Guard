@@ -1,26 +1,46 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {LoginService} from "./service/login.service";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit , OnDestroy{
 
+  subscription : Subscription [] = []
   title = 'guard';
-  isAuthenticated = this.loginService.isAuthenticated();
+  isAuthenticated  : boolean = false
+
 
   constructor(private loginService: LoginService) {
   }
 
   onLogout() {
+    this.isAuthenticated = false
     this.loginService.logout();
-    this.loginService.loginSuccess.subscribe((res) => {
-      alert(res);
-    })
   }
 
+
+  
+  ngOnInit(): void {
+        this.subscription.push(
+          this.loginService.loginSuccess.subscribe((res :  any)=> {
+            this.isAuthenticated = res.value
+          })
+        )
+  }
+  
+
+
+  ngOnDestroy(): void {
+      this.subscription.forEach(x => x.unsubscribe)
+  }
+
+
+
+  // property get
   // get isAuthenticated() {
   //   return this.loginService.isAuthenticated();
   // }

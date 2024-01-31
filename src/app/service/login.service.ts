@@ -14,7 +14,7 @@ export class LoginService {
   url: string = "http://localhost:3000";
   authenticated: boolean = false;
   // This subject is used to emit the event of a successful (true) or unsuccessful (false) login attempt.
-  private _loginSuccess$: Subject<boolean> = new Subject<boolean>();
+  private _loginSuccess$: Subject<any> = new Subject<any>();
   // This BehaviourSubject is used to hold and emit the data of the logged in user, or undefined if the user is not logged in.
   private _userProfile$: BehaviorSubject<IUser | undefined> = new BehaviorSubject<IUser | undefined>(undefined);
 
@@ -37,16 +37,27 @@ export class LoginService {
         let user: IUser | undefined = users.find(x => x.email === email && x.password === password);
         if (user) {
           this.authenticated = true;
-          this._loginSuccess$.next(true);
+          this._loginSuccess$.next({
+            value : true , 
+            event : 'login' 
+          });
           this._userProfile$.next(user);
         } else {
-          this._loginSuccess$.next(false);
+          this._loginSuccess$.next({
+            value : false , 
+            event : 'login' 
+          });
         }
       }
     );
   }
 
+
   logout() {
+    this._loginSuccess$.next({
+      value : false , 
+      event : 'logout' 
+    });
     this.authenticated = false;
     this.router.navigate([''], {relativeTo: this.routes});
   }

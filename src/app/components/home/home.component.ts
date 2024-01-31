@@ -21,17 +21,23 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private routes: ActivatedRoute, private loginService: LoginService) {
   }
 
+
+
   ngOnInit(): void {
     // Add subscription to subscriptions array
     this.subscriptions.push(
       // listen for login success/error
-      this.loginService.loginSuccess.subscribe((success: boolean) => {
-        this.loggedIn = success;
-        let loginMessage = success ? 'Login was successful' : 'Error logging in';
-        alert(loginMessage);
+      this.loginService.loginSuccess.subscribe((result: any) => {
+        this.loggedIn = result.value;
+        if(result.event ==  'login') { 
+          let loginMessage = result ? 'Login was successful' : 'Error logging in';
+          alert(loginMessage);
+        }
       })
     );
   }
+
+
 
   onRegister() {
     this.router.navigate(['/register'], {relativeTo: this.routes});
