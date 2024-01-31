@@ -24,10 +24,12 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate {
   ngOnInit(): void {
   }
 
-  onAddUser(name: string, email: string, password: string) {
+  onAddUser(name: string, lastname: string, email: string, password: string) {
     this.user = new User(0, '', '', '', '');
     this.userService.get().subscribe((users) => {
       if (users.length > 0) {
+        // users= [{id: 1, name: 'fa'}, {id: 2, name: 'sa'}]
+        // ids= [1,2];
         let ids = users.map(u => u.id);
         let maxId = Math.max(...ids);
         this.user.id = maxId + 1;
@@ -35,6 +37,7 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate {
         this.user.id = 1;
       }
       this.user.name = name;
+      this.user.lastname = lastname;
       this.user.email = email;
       this.user.password = password;
 
