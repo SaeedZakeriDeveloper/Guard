@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/service/user.service';
-import { ActivatedRoute, Router } from "@angular/router";
-import { CanComponentDeactivate } from "../../guards/register.guard";
-import { Observable } from "rxjs";
-import { User } from 'src/app/classes/user';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-
+import {Component, OnInit} from '@angular/core';
+import {UserService} from 'src/app/service/user.service';
+import {Router} from "@angular/router";
+import {CanComponentDeactivate} from "../../guards/register.guard";
+import {Observable} from "rxjs";
+import {User} from 'src/app/classes/user';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -17,8 +16,9 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate {
   user: User = new User(0, '', '', '', '');
   registerForm!: FormGroup;
 
-  constructor(private userService: UserService, private router: Router, private routes: ActivatedRoute) {
+  constructor(private userService: UserService, private router: Router) {
   }
+
   ngOnInit(): void {
     this.registerForm = new FormGroup({
       'name': new FormControl(null, Validators.required),
@@ -47,11 +47,10 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate {
       this.userService.add(this.user).subscribe((res) => {
         alert('success');
         this.registerForm.reset();
-        this.router.navigate([''], { relativeTo: this.routes });
+        this.router.navigate(['']);
       });
     });
   }
-
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     let name = this.registerForm.value.name;
@@ -60,15 +59,20 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate {
     let password = this.registerForm.value.password;
     if (name || lastname || email || password) {
       if (confirm("Are you sure to exit?")) {
+        // کد ";()this.registerForm.reset" به این دلیل اضافه شده است:
+        // در حالتی که کاربر هنوز لاگین نکرده است
+        // وقتی منوی "admin" رو کلیک می کرد confirm دو مرتبه اجرا میشد
+        // چون کامپوننت admin گارد دارد دو بار path تغییر می کند
+        // یک بار وقتی از کامپوننت register به کامپوننت admin می رود(چون لاگین نکرده است وارد کامپوننت admin نمی شود)
+        // و بار دیگر وقتی از کامپوننت register به کامپوننت notAuthenticated می رود
         this.registerForm.reset();
-        return true
+        return true;
+      } else {
+        return false;
       }
-      else {
-        return false
-      }
-    }
-    else {
-      return true
+    } else {
+      return true;
     }
   }
+
 }

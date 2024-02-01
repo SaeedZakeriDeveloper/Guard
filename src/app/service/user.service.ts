@@ -24,6 +24,3 @@ export class UserService {
   }
 
 }
-
-
-//enterface  class   service    IService

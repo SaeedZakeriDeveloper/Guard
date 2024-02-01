@@ -15,5 +15,13 @@
 </div>
 
 <div *ngIf="loggedIn">
+  <!--  async pipe convert "Observable<IUser | undefined>" to "IUser | undefined" -->
+  <!--  The async pipe subscribes to an Observable or Promise and returns-->
+  <!--  the latest value it has emitted. When a new value is emitted, the async-->
+  <!--  pipe marks the component to be checked for changes. When the component-->
+  <!--  gets destroyed, the async pipe unsubscribes automatically to avoid potential-->
+  <!--  memory leaks. When the reference of the expression changes,-->
+  <!--  the async pipe automatically unsubscribes from the old Observable-->
+  <!--  or Promise and subscribes to the new one. -->
   <p class="text-primary p-3"><span class="fs-5 fw-bold">{{(profile | async)?.name}}</span> welcome to Guard system.</p>
 </div>
