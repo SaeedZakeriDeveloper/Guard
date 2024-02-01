@@ -13,7 +13,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class RegisterComponent implements OnInit, CanComponentDeactivate {
 
-  user: User = new User(0, '', '', '', '');
+  // زمانی که یک کلاس را new میکنیم، constructor آن کلاس fire می شود
+  user: User = new User(0, '', '', '');
   registerForm!: FormGroup;
 
   constructor(private userService: UserService, private router: Router) {
@@ -29,7 +30,7 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate {
   }
 
   onSubmit() {
-    this.user = new User(0, '', '', '', '');
+    this.user = new User(0, '', '', '');
     this.userService.get().subscribe((users) => {
       if (users.length > 0) {
         // users = [{id: 1, name: 'fa'}, {id: 2, name: 'sa'}] => map => ids = [1, 2]
