@@ -13,11 +13,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class RegisterComponent implements OnInit, CanComponentDeactivate {
 
-  @ViewChild('name') name: ElementRef | undefined;
-  @ViewChild('lastname') lastname: ElementRef | undefined;
-  @ViewChild('email') email: ElementRef | undefined;
-  @ViewChild('password') password: ElementRef | undefined;
-  // user: User = {id: 0, name: '', email: '', password: '', lastname: ''};
+
   user: User = new User(0, '', '', '', '');
   added: boolean = false;
   registerForm!: FormGroup;
@@ -59,10 +55,10 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
-    let name = this.name?.nativeElement.value;
-    let lastname = this.lastname?.nativeElement.value;
-    let email = this.email?.nativeElement.value;
-    let password = this.password?.nativeElement.value;
+    let name = this.registerForm.value.name;
+    let lastname = this.registerForm.value.lastname;
+    let email = this.registerForm.value.email;
+    let password = this.registerForm.value.password;
     if ((name || lastname || email || password) && !this.added) {
       return confirm("Are you sure to exit?");
     } else {
