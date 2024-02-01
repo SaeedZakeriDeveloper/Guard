@@ -9,6 +9,8 @@ import {RegisterComponent} from './components/register/register.component';
 import {HttpClientModule} from '@angular/common/http';
 import { NotAuthenticatedComponent } from './components/not-authenticated/not-authenticated.component'
 import { ReactiveFormsModule } from '@angular/forms';
+import { AboutChild1Component } from './components/about-child1/about-child1.component';
+import { AboutChild2Component } from './components/about-child2/about-child2.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     AboutComponent,
     AdminComponent,
     RegisterComponent,
-    NotAuthenticatedComponent
+    NotAuthenticatedComponent,
+    AboutChild1Component,
+    AboutChild2Component
   ],
   imports: [
     BrowserModule,

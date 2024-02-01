@@ -1,4 +1,4 @@
-import {ActivatedRoute, CanActivateFn, Router} from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot, CanActivateChildFn, CanActivateFn, Router, RouterStateSnapshot} from '@angular/router';
 import {inject} from "@angular/core";
 import {LoginService} from "../service/login.service";
 
@@ -16,3 +16,8 @@ export const authGuard: CanActivateFn = (route, state) => {
   }
 
 };
+
+
+export const canActivateChild: CanActivateChildFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>
+  authGuard(route, state);
+
