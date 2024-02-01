@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {UserService} from 'src/app/service/user.service';
-import {ActivatedRoute, Router} from "@angular/router";
-import {CanComponentDeactivate} from "../../guards/register.guard";
-import {Observable} from "rxjs";
-import {User} from 'src/app/classes/user';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/service/user.service';
+import { ActivatedRoute, Router } from "@angular/router";
+import { CanComponentDeactivate } from "../../guards/register.guard";
+import { Observable } from "rxjs";
+import { User } from 'src/app/classes/user';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -47,10 +47,11 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate {
       this.userService.add(this.user).subscribe((res) => {
         alert('success');
         this.registerForm.reset();
-        this.router.navigate([''], {relativeTo: this.routes});
+        this.router.navigate([''], { relativeTo: this.routes });
       });
     });
   }
+
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     let name = this.registerForm.value.name;
@@ -58,10 +59,16 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate {
     let email = this.registerForm.value.email;
     let password = this.registerForm.value.password;
     if (name || lastname || email || password) {
-      return confirm("Are you sure to exit?");
-    } else {
-      return true;
+      if (confirm("Are you sure to exit?")) {
+        this.registerForm.reset();
+        return true
+      }
+      else {
+        return false
+      }
+    }
+    else {
+      return true
     }
   }
-
 }

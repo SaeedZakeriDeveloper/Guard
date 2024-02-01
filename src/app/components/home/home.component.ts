@@ -38,14 +38,18 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
 
+  
+
+
   onRegister() {
     this.router.navigate(['/register'], {relativeTo: this.routes});
   }
 
+
+
   onSignIn(email: string, password: string) {
     this.loginService.login(email, password);
   }
-
 
 
   ngOnDestroy(): void {
