@@ -8,6 +8,7 @@ import {AdminComponent} from './components/admin/admin.component';
 import {RegisterComponent} from './components/register/register.component';
 import {HttpClientModule} from '@angular/common/http';
 import { NotAuthenticatedComponent } from './components/not-authenticated/not-authenticated.component'
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NotAuthenticatedComponent } from './components/not-authenticated/not-au
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule, 
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CanComponentDeactivate} from "../../guards/register.guard";
 import {Observable} from "rxjs";
 import {User} from 'src/app/classes/user';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -17,12 +18,24 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate {
   // user: User = {id: 0, name: '', email: '', password: '', lastname: ''};
   user: User = new User(0, '', '', '', '');
   added : boolean = false
+  inputForm! : FormGroup 
 
   constructor(private userService: UserService, private router: Router, private routes: ActivatedRoute) {
   }
+
+
   ngOnInit(): void {
+    this.inputForm = new FormGroup ({
+      'name' : new FormControl (null,Validators.required ),
+      'lastname' : new FormControl (null,Validators.required ) ,
+      'email' :  new FormControl (null,Validators.required ),
+      'password' :  new FormControl (null,Validators.required ),
+})
   }
-  onAddUser(name: string, lastname: string, email: string, password: string) {
+
+
+
+  onSubmit() {
     this.user = new User(0, '', '', '', '');
     this.userService.get().subscribe((users) => {
       if (users.length > 0) {
@@ -34,10 +47,10 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate {
       } else {
         this.user.id = 1;
       }
-      this.user.name = name;
-      this.user.lastname = lastname;
-      this.user.email = email;
-      this.user.password = password;
+      this.user.name = this.inputForm.value.name
+      this.user.lastname = this.inputForm.value.lastname;
+      this.user.email = this.inputForm.value.email
+      this.user.password = this.inputForm.value.password
 
       this.userService.add(this.user).subscribe((res) => {
         alert('success');
@@ -46,6 +59,8 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate {
       });
     });
   }
+
+
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     let name = this.name?.nativeElement.value;
     let email = this.email?.nativeElement.value;
@@ -56,4 +71,11 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate {
       return true;
     }
   }
+
+
+
+
+
+
+
 }

@@ -1,23 +1,26 @@
-<form class="p-4">
+<form class="p-4" [formGroup]="inputForm" (submit)="onSubmit()">
   <div class="form-group">
     <label for="inputName">Name</label>
-    <input class="form-control" id="inputName" placeholder="Please enter your name" #name>
+    <input class="form-control" id="inputName" placeholder="Please enter your name" #name [formControlName]="'name'">
   </div>
   <div class="form-group mt-3">
     <label for="inputLastname">Lastname</label>
-    <input class="form-control" id="inputLastname" placeholder="Please enter your lastname" #lastname>
+    <input class="form-control" id="inputLastname" placeholder="Please enter your lastname" #lastname
+      [formControlName]="'lastname'">
   </div>
   <div class="form-group mt-3">
     <label for="inputEmail">Email</label>
-    <input type="email" class="form-control" id="inputEmail" placeholder="Please enter your email" #email>
+    <input type="email" class="form-control" id="inputEmail" placeholder="Please enter your email" #email
+      [formControlName]="'email'">
   </div>
   <div class="form-group mt-3 mb-4">
     <label for="inputPassword">Password</label>
-    <input type="password" class="form-control" id="inputPassword" placeholder="Please enter your password"
-           #password>
+    <input type="password" class="form-control" id="inputPassword" placeholder="Please enter your password" #password
+      [formControlName]="'password'">
   </div>
-  <button type="button" class="btn btn-success mt-3"
-          (click)="onAddUser(name.value ,lastname.value, email.value , password.value)">
+  <!-- <button type="button" class="btn btn-success mt-3"
+    (click)="onAddUser(name.value ,lastname.value, email.value , password.value)">
     Sign up
-  </button>
+  </button> -->
+  <button type="submit" class="btn btn-success mt-3" [disabled]="!inputForm.valid">Submit</button>
 </form>

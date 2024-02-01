@@ -11,3 +11,9 @@ form {
   border: 1px solid #d3cccc;
   border-radius: 5px;
 }
+
+
+
+input.ng-invalid.ng-touched { 
+  border : 1px   solid   red  
+}
