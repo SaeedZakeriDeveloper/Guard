@@ -1,21 +1,21 @@
 <form class="p-4" [formGroup]="registerForm" (submit)="onSubmit()">
   <div class="form-group">
     <label for="inputName">Name</label>
-    <input class="form-control" id="inputName" placeholder="Please enter your name" #name [formControlName]="'name'">
+    <input class="form-control" id="inputName" placeholder="Please enter your name" [formControlName]="'name'">
   </div>
   <div class="form-group mt-3">
     <label for="inputLastname">Lastname</label>
-    <input class="form-control" id="inputLastname" placeholder="Please enter your lastname" #lastname
+    <input class="form-control" id="inputLastname" placeholder="Please enter your lastname"
            [formControlName]="'lastname'">
   </div>
   <div class="form-group mt-3">
     <label for="inputEmail">Email</label>
-    <input type="email" class="form-control" id="inputEmail" placeholder="Please enter your email" #email
+    <input type="email" class="form-control" id="inputEmail" placeholder="Please enter your email"
            [formControlName]="'email'">
   </div>
   <div class="form-group mt-3 mb-4">
     <label for="inputPassword">Password</label>
-    <input type="password" class="form-control" id="inputPassword" placeholder="Please enter your password" #password
+    <input type="password" class="form-control" id="inputPassword" placeholder="Please enter your password"
            [formControlName]="'password'">
   </div>
 

@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from 'src/app/service/user.service';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CanComponentDeactivate} from "../../guards/register.guard";
@@ -13,9 +13,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class RegisterComponent implements OnInit, CanComponentDeactivate {
 
-
   user: User = new User(0, '', '', '', '');
-  added: boolean = false;
   registerForm!: FormGroup;
 
   constructor(private userService: UserService, private router: Router, private routes: ActivatedRoute) {
@@ -24,10 +22,10 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate {
   ngOnInit(): void {
     this.registerForm = new FormGroup({
       'name': new FormControl(null, Validators.required),
-      'lastname': new FormControl(null, Validators.required),
+      'lastname': new FormControl(null),
       'email': new FormControl(null, Validators.required),
       'password': new FormControl(null, Validators.required)
-    })
+    });
   }
 
   onSubmit() {
@@ -48,7 +46,7 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate {
 
       this.userService.add(this.user).subscribe((res) => {
         alert('success');
-        this.added = true
+        this.registerForm.reset();
         this.router.navigate([''], {relativeTo: this.routes});
       });
     });
@@ -59,7 +57,7 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate {
     let lastname = this.registerForm.value.lastname;
     let email = this.registerForm.value.email;
     let password = this.registerForm.value.password;
-    if ((name || lastname || email || password) && !this.added) {
+    if (name || lastname || email || password) {
       return confirm("Are you sure to exit?");
     } else {
       return true;
