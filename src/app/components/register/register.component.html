@@ -1,4 +1,4 @@
-<form class="p-4" [formGroup]="inputForm" (submit)="onSubmit()">
+<form class="p-4" [formGroup]="registerForm" (submit)="onSubmit()">
   <div class="form-group">
     <label for="inputName">Name</label>
     <input class="form-control" id="inputName" placeholder="Please enter your name" #name [formControlName]="'name'">
@@ -6,21 +6,18 @@
   <div class="form-group mt-3">
     <label for="inputLastname">Lastname</label>
     <input class="form-control" id="inputLastname" placeholder="Please enter your lastname" #lastname
-      [formControlName]="'lastname'">
+           [formControlName]="'lastname'">
   </div>
   <div class="form-group mt-3">
     <label for="inputEmail">Email</label>
     <input type="email" class="form-control" id="inputEmail" placeholder="Please enter your email" #email
-      [formControlName]="'email'">
+           [formControlName]="'email'">
   </div>
   <div class="form-group mt-3 mb-4">
     <label for="inputPassword">Password</label>
     <input type="password" class="form-control" id="inputPassword" placeholder="Please enter your password" #password
-      [formControlName]="'password'">
+           [formControlName]="'password'">
   </div>
-  <!-- <button type="button" class="btn btn-success mt-3"
-    (click)="onAddUser(name.value ,lastname.value, email.value , password.value)">
-    Sign up
-  </button> -->
-  <button type="submit" class="btn btn-success mt-3" [disabled]="!inputForm.valid">Submit</button>
+
+  <button type="submit" class="btn btn-success mt-3" [disabled]="!registerForm.valid">Submit</button>
 </form>

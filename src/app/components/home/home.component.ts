@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   // Holds array of subscriptions made during component lifetime.
   subscriptions: Subscription[] = [];
   // Store profile observable which we can display after login.
-  profile: Observable<IUser | undefined> = this.loginService.userProfile;
+  profile: Observable<IUser | undefined> = this.loginService.userProfileBehaviorSubject;
 
   constructor(private router: Router, private routes: ActivatedRoute, private loginService: LoginService) {
   }
@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     // Add subscription to subscriptions array
     this.subscriptions.push(
       // listen for login success/error
-      this.loginService.loginSuccess.subscribe((result: any) => {
+      this.loginService.loginSubject.subscribe((result: any) => {
         this.loggedIn = result.value;
         if(result.event ==  'login') {    //nemidonestim next ke dare sub mishe az login hast ya logout
           let loginMessage = result.value ? 'Login was successful' : 'Error logging in';

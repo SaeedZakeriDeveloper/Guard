@@ -24,8 +24,8 @@ export class AppComponent implements OnInit , OnDestroy{
 
   ngOnInit(): void {
         this.subscription.push(
-          // تنها و تنها زمانی این سابجکت فایر می شود که در لاگین سرویس نکست شده باشد
-          this.loginService.loginSuccess.subscribe((res :  any)=> {
+          // تنها لحظه ایی این سابجکت فایر می شود که در لاگین سرویس نکست شده باشد
+          this.loginService.loginSubject.subscribe((res :  any)=> {
             this.isAuthenticated = res.value
           })
         );

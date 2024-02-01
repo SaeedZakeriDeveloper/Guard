@@ -15,4 +15,5 @@ export class User implements IUser {
     this.password = password;
     this.lastname = lastname;
   }
+
 }
