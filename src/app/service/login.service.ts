@@ -31,9 +31,9 @@ export class LoginService {
     return this._userProfileBehaviorSubject$;
   }
 
+
   login(email: string, password: string) {
     let users: IUser[] = [];
-
     this.userService.get().subscribe((res: IUser[]) => {
         users = res;
         let user: IUser | undefined = users.find(x => x.email === email && x.password === password);

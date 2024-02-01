@@ -6,6 +6,7 @@ import { Observable } from "rxjs";
 import { User } from 'src/app/classes/user';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -18,7 +19,6 @@ export class RegisterComponent implements OnInit, CanComponentDeactivate {
 
   constructor(private userService: UserService, private router: Router, private routes: ActivatedRoute) {
   }
-
   ngOnInit(): void {
     this.registerForm = new FormGroup({
       'name': new FormControl(null, Validators.required),
